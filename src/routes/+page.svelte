@@ -26,15 +26,12 @@
 	}
 
 	function play() {
+		if (!continueWatching.some((s) => s.id === selected.id)) {
+			continueWatching = [selected, ...continueWatching];
+		}
 		if (selected?.video) {
-			if (!continueWatching.some((s) => s.id === selected.id)) {
-				continueWatching = [selected, ...continueWatching];
-			}
 			playing = true;
 		} else {
-			if (!continueWatching.some((s) => s.id === selected.id)) {
-				continueWatching = [selected, ...continueWatching];
-			}
 			unavailable = true;
 		}
 	}

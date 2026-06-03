@@ -35,11 +35,7 @@
 	}
 
 	function play() {
-		if (selected?.video) {
-			// future: launch video player
-		} else {
-			unavailable = true;
-		}
+		if (!selected?.video) unavailable = true;
 	}
 </script>
 
