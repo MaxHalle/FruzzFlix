@@ -1,5 +1,10 @@
 <script>
 	import { series, sections } from '$lib/series.js';
+	import { base } from '$app/paths';
+
+	function fixBg(str) {
+		return str.replace(/url\(\//g, `url(${base}/`);
+	}
 
 	const otherSections = sections.filter((s) => s.title !== 'Continue Watching');
 
@@ -53,7 +58,7 @@
 		role="dialog"
 		aria-modal="true"
 		tabindex="-1"
-		style="background: {selected.bg}"
+		style="background: {fixBg(selected.bg)}"
 		onkeydown={(e) => e.key === 'Escape' && close()}
 	>
 		<div class="detail-fade"></div>
@@ -88,7 +93,7 @@
 			<div class="row-wrap">
 				<div class="row">
 					{#each continueWatching as show (show.id)}
-						<button class="card" style="background: {show.thumb ?? show.bg}" onclick={() => open(show)}>
+						<button class="card" style="background: {fixBg(show.thumb ?? show.bg)}" onclick={() => open(show)}>
 							<div class="card-info">
 								<span class="card-title">{show.title}</span>
 								<span class="card-genre">{show.genre}</span>
@@ -108,7 +113,7 @@
 					{#each section.ids as id (id)}
 						{@const show = series.find((s) => s.id === id)}
 						{#if show}
-							<button class="card" style="background: {show.thumb ?? show.bg}" onclick={() => open(show)}>
+							<button class="card" style="background: {fixBg(show.thumb ?? show.bg)}" onclick={() => open(show)}>
 								<div class="card-info">
 									<span class="card-title">{show.title}</span>
 									<span class="card-genre">{show.genre}</span>

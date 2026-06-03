@@ -1,5 +1,10 @@
 <script>
 	import { series } from '$lib/series.js';
+	import { base } from '$app/paths';
+
+	function fixBg(str) {
+		return str.replace(/url\(\//g, `url(${base}/`);
+	}
 
 	let query = $state('');
 	let selected = $state(null);
@@ -44,7 +49,7 @@
 		role="dialog"
 		aria-modal="true"
 		tabindex="-1"
-		style="background: {selected.bg}"
+		style="background: {fixBg(selected.bg)}"
 		onkeydown={(e) => e.key === 'Escape' && close()}
 	>
 		<div class="detail-fade"></div>
@@ -89,7 +94,7 @@
 			</div>
 			<div class="grid">
 				{#each results as show (show.id)}
-					<button class="card" style="background: {show.thumb ?? show.bg}" onclick={() => open(show)}>
+					<button class="card" style="background: {fixBg(show.thumb ?? show.bg)}" onclick={() => open(show)}>
 						<div class="card-info">
 							<span class="card-title">{show.title}</span>
 							<span class="card-genre">{show.genre}</span>
