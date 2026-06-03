@@ -44,7 +44,7 @@
 {#if playing && selected?.video}
 	<div class="video-overlay">
 		<!-- svelte-ignore a11y_media_has_caption -->
-		<video src={selected.video} autoplay controls onended={stopVideo}></video>
+		<video src="{base}{selected.video}" autoplay controls onended={stopVideo}></video>
 		<button class="close-btn" onclick={stopVideo}>✕</button>
 	</div>
 {/if}
